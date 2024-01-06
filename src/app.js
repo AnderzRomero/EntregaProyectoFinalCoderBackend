@@ -1,7 +1,7 @@
 import express from "express";
 import exphbs from 'express-handlebars';
 import cookieParser from "cookie-parser";
-import "./dao/mongo/dbConfig.js";
+import  "./dao/mongo/dbconfig.js";
 
 import viewsRouter from "./routes/ViewsRouter.js";
 import SessionsRouter from "./routes/SessionsRouter.js";

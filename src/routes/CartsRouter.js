@@ -6,7 +6,7 @@ class CartsRouter extends BaseRouter {
     // Endpoint para obtener carrito
     this.get("/", ['USER', 'PREMIUM'], cartsControllers.getCart);
     // Endpoint para obtener carrito para compra
-    this.get("/:cid", ['USER'], cartsControllers.getCartCompra);
+    this.get("/:cid", ['USER', 'PREMIUM'], cartsControllers.getCartCompra);
     // Endpoint para crear carrito
     this.post("/", ['ADMIN'], cartsControllers.createCart);
     // Endpoint para crear tickets
@@ -18,7 +18,7 @@ class CartsRouter extends BaseRouter {
     // Endpoint para eliminar producto del carrito
     this.delete('/products/:pid', ['USER'], cartsControllers.deleteProductInCart);
     // Endpoint para vaciar Totalmente el carrito
-    this.delete('/products', ['USER'], cartsControllers.deleteAllProductsInCart);
+    this.delete('/products', ['USER', 'PREMIUM'], cartsControllers.deleteAllProductsInCart);
   }
 }
 
