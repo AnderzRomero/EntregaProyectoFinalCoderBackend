@@ -25,6 +25,7 @@ export default class LoggerService {
           transports: [
             new winston.transports.Console({
               level: 'debug',
+              format: winston.format.simple()
             }),
             new winston.transports.File({
               level: 'error',

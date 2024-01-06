@@ -37,7 +37,7 @@ Este es un proyecto de ecommerce básico que se utiliza para el curso de Program
 
 ## Configuraciones Especiales
 > [!IMPORTANT]
-> 1. Se debe descomprimir el archivo de entorno Virtual para luego copiar a la raiz las variables de entorno para la de conexion a la base de datos ".env.dev y .env.prod".
+> 1. Se debe descomprimir el archivo de entorno Virtual, luego copiar a la raiz las variables de entorno y poder realizar la conexion a la base de datos ".env.dev y .env.prod".
 
 ## Licencia
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para obtener más información.
