@@ -265,7 +265,7 @@ const register = async (req, res, next) => {
 const profile = async (req, res, next) => {
     try {
         req.logger.info("Se redirecciona a la vista de perfil");
-        return res.render('Profile', {
+        return res.render('profile', {
             css: 'profile'
         });
     } catch (error) {
@@ -297,7 +297,7 @@ const getproducts = async (req, res, next) => {
         }
 
         const pagination = await productsService.paginateProducts(cleanFilters, { page, lean: true, limit, sort: sortOptions });
-        res.render('Products', {
+        res.render('products', {
             css: 'products',
             user: req.user,
             products: pagination.docs,
