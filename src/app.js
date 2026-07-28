@@ -41,6 +41,9 @@ const hbs = exphbs.create({
         },
         subtotal: function (value1, value2) {
             return value1 * value2;
+        },
+        eq: function (v1, v2) {
+            return v1 === v2;
         }
     }
 });

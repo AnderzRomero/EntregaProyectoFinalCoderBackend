@@ -1,21 +1,64 @@
-<div>
-  <h1 class="title">Compra finalizada</h1>
-  <br>
-  <h5 class="subtitle"><strong>Gracias por tu compra.</strong> Aquí está el detalle:</h5>
-  <br>
-  <br>
-  <div class="row" id="ticket"></div>
-
-  <div class="btnCart"><input class="btn btn-dark" type="submit" value="Finalizar compra"
-      id="finish" /></div>
-  <div class="footerTicket">
-    <p>Cordial saludo!!</p>
-    <p><strong>@ Hero Systems</strong></p>
-  </div>
-  <!-- Añade el valor de cart._id como un atributo de un elemento HTML -->
-  <div id="cartId" data-cartid="{{cart._id}}"></div>
-  <div id="userName" data-username="{{user.name}}"></div>
-
+<div class="page-header">
+  <h1><i class="fas fa-check-circle"></i> Compra Finalizada</h1>
+  <p class="subtitle">Gracias por tu compra, <strong>{{user.name}}</strong></p>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+
+<div class="ticket-page">
+  <div class="ticket-success-icon">
+    <i class="fas fa-check-circle"></i>
+  </div>
+  <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan);">¡Pago Exitoso!</h3>
+  <p style="color: var(--text-secondary); margin-bottom: 32px;">Tu compra ha sido procesada correctamente</p>
+
+  <div class="ticket-card" id="ticket">
+    <div class="ticket-header">
+      <h3><i class="fas fa-receipt"></i> Detalle de la Compra</h3>
+      <p>Recibirás un correo con la confirmación de tu pedido</p>
+    </div>
+
+    {{#if cart.products.length}}
+    <div class="table-responsive-tech">
+      <table class="table-tech">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each cart.products}}
+          <tr>
+            <td>{{this._id.title}}</td>
+            <td>{{this.quantity}}</td>
+            <td>${{this._id.price}}</td>
+            <td style="color: var(--accent-cyan); font-weight: 600;">${{subtotal this._id.price this.quantity}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    {{/if}}
+
+    <div class="ticket-total">
+      Total: ${{sumPrice cart.products}}
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap;">
+    <a href="/products" class="btn btn-primary-tech btn-lg"><i class="fas fa-store"></i> Seguir Comprando</a>
+    <button class="btn btn-ghost btn-lg" id="finish"><i class="fas fa-check"></i> Finalizar</button>
+  </div>
+
+  <div class="ticket-footer">
+    <p>Cordial saludo,</p>
+    <p>El equipo de <strong>@HeroSystems</strong></p>
+    <p style="font-size: 0.8rem; margin-top: 8px;">Si tienes alguna duda sobre tu pedido, contáctanos al <span style="color: var(--accent-cyan);">info@herosystems.com</span></p>
+  </div>
+
+  <div id="cartId" data-cartid="{{cart._id}}" style="display: none;"></div>
+  <div id="userName" data-username="{{user.name}}" style="display: none;"></div>
+</div>
+
 <script src="/js/purchase.js"></script>

@@ -9,7 +9,8 @@ import uploader from '../services/uploadService.js';
 const home = async (req, res, next) => {
     try {
         return res.render("home", {
-            css: 'home'
+            css: 'home',
+            title: 'Inicio'
         });
     } catch (error) {
         req.logger.error(error);
@@ -19,7 +20,8 @@ const home = async (req, res, next) => {
 const contact = async (req, res, next) => {
     try {
         return res.render("contact", {
-            css: 'contact'
+            css: 'contact',
+            title: 'Contacto'
         });
     } catch (error) {
         req.logger.error(error);
@@ -223,7 +225,8 @@ const login = async (req, res, next) => {
     try {
         req.logger.info("Se redirecciona a la vista de login");
         res.render('login', {
-            css: 'login'
+            css: 'login',
+            title: 'Iniciar Sesión'
         })
     } catch (error) {
         req.logger.error("No se logro redireccionar a la vista de login", error)
@@ -244,7 +247,8 @@ const register = async (req, res, next) => {
     try {
         req.logger.info("Se redirecciona a la vista de registrar");
         res.render('register', {
-            css: 'register'
+            css: 'register',
+            title: 'Registro'
         })
     } catch (error) {
         req.logger.error("No se logro redireccionar a la vista de registrar", error)
@@ -266,7 +270,8 @@ const profile = async (req, res, next) => {
     try {
         req.logger.info("Se redirecciona a la vista de perfil");
         return res.render('profile', {
-            css: 'profile'
+            css: 'profile',
+            title: 'Mi Perfil'
         });
     } catch (error) {
         req.logger.error("No se logro redireccionar a la vista de perfil", error)
@@ -299,6 +304,7 @@ const getproducts = async (req, res, next) => {
         const pagination = await productsService.paginateProducts(cleanFilters, { page, lean: true, limit, sort: sortOptions });
         res.render('products', {
             css: 'products',
+            title: 'Tienda',
             user: req.user,
             products: pagination.docs,
             page: pagination.page,
@@ -334,7 +340,8 @@ const passwordRestore = async (req, res, next) => {
         try {
             jwt.verify(token, config.jwt.SECRET);
             res.render('PasswordRestore', {
-                css: 'restore'
+                css: 'restore',
+                title: 'Restablecer Contraseña'
             });
         } catch (error) {
             req.logger.error("Link inválido o corrupto, favor debe solicitar un nuevo correo");
@@ -364,7 +371,8 @@ const passwordRestore = async (req, res, next) => {
 const productCreator = async (req, res, next) => {
     try {
         return res.render('productCreator', {
-            css: 'productsCreater'
+            css: 'productsCreater',
+            title: 'Gestión de Productos'
         });
     } catch (error) {
         req.logger.error("No se logro redireccionar a la vista de creacion de productos", error)
@@ -385,7 +393,8 @@ const productCreator = async (req, res, next) => {
 const premium = async (req, res, next) => {
     try {
         return res.render('premium', {
-            css: 'premium'
+            css: 'premium',
+            title: 'Suscripción Premium'
         });
     } catch (error) {
         req.logger.error("No se logro redireccionar a la vista de Premium", error)

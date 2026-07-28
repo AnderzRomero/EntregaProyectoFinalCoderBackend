@@ -1,42 +1,110 @@
-<h1 class="title">Lista de Productos</h1>
-{{#if user}}
-<h2 class="subtitle">Bienvenid@ {{user.name}} Tienes el rol de :{{user.role}}</h2>
-<a href="/api/sessions/logout"><button class="btn btn-logon">Cerrar Session</button></a>
-{{else}}
-{{/if}}
-<br>
-<div class="container">
+<div class="page-header">
+  <h1><i class="fas fa-microchip"></i> Tienda HeroSystems</h1>
+  {{#if user}}
+  <p class="subtitle">Bienvenid@ <strong>{{user.name}}</strong> <span class="badge-tech {{#if (eq user.role 'admin')}}purple{{else if (eq user.role 'premium')}}green{{else}}cyan{{/if}}">{{user.role}}</span></p>
+  {{else}}
+  <p class="subtitle">Los mejores productos de tecnología a tu alcance</p>
+  {{/if}}
+</div>
 
+<div class="products-page">
+  {{#if user}}
+  <div class="welcome-banner">
+    <div class="welcome-text">
+      <i class="fas fa-user-astronaut"></i> ¡Hola <span>{{user.name}}</span>! Explora nuestro catálogo
+      <span class="welcome-role"><i class="fas fa-shield-alt"></i> {{user.role}}</span>
+    </div>
+    <div>
+      <a href="/api/sessions/logout" class="btn btn-ghost btn-sm"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="products-header">
+    <div class="products-count">
+      <i class="fas fa-box"></i> Mostrando productos <span id="productCount">{{products.length}}</span>
+    </div>
+    <div class="filter-group">
+      <select id="sortFilter" onchange="applyFilter()">
+        <option value="">Ordenar por</option>
+        <option value="asc">Precio: Menor a Mayor</option>
+        <option value="desc">Precio: Mayor a Menor</option>
+      </select>
+      <select id="categoryFilter" onchange="applyFilter()">
+        <option value="">Todas las Categorías</option>
+        <option value="Tarjetas Graficas">Tarjetas Gráficas</option>
+        <option value="Memorias RAM">Memorias RAM</option>
+        <option value="Monitores">Monitores</option>
+        <option value="Teclados">Teclados</option>
+        <option value="Mouse">Mouse</option>
+        <option value="Sillas">Sillas</option>
+        <option value="Portatiles Gamer">Portátiles Gamer</option>
+      </select>
+      <select id="limitFilter" onchange="applyFilter()">
+        <option value="4">4 por página</option>
+        <option value="8">8 por página</option>
+        <option value="12">12 por página</option>
+        <option value="20">20 por página</option>
+      </select>
+    </div>
+  </div>
+
+  {{#if products.length}}
+  <div class="products-grid">
     {{#each products}}
-    <br>
-
-    <div class="card">
-        <div class="card-body">
-            <img class="card-img" src={{this.thumbnail}} alt={{this.title}}>
-            <h5 class="card-title">{{this.title}}</h5>
-            <div class="card-info">
-                <p class="card-text">{{this.description}}</p>
-                <p class="card-text"><strong>Categoría: </strong>{{this.category}}</p>
-                <p class="card-text"><strong>Código:</strong> {{this.code}}</p>
-                <p class="card-text"><strong>Stock:</strong> {{this.stock}}</p>
-                <p class="card-text"><strong>Precio: $ </strong>{{this.price}}</p>
-            </div>
-        </div>
-        <button onclick="addProduct('{{this._id}}')" class="btn btn-card">Agregar al Carrito</button>
+    <div class="card-tech">
+      <img class="card-img-top" src="{{this.thumbnail}}" alt="{{this.title}}">
+      <div class="card-body">
+        <span class="card-category"><i class="fas fa-tag"></i> {{this.category}}</span>
+        <h5 class="card-title">{{this.title}}</h5>
+        <p class="card-text">{{this.description}}</p>
+        <p class="card-text card-stock"><i class="fas fa-cube"></i> Código: {{this.code}} | <i class="fas fa-boxes"></i> Stock: {{this.stock}}</p>
+        <div class="card-price">${{this.price}}</div>
+      </div>
+      <div class="card-footer">
+        <button onclick="addProduct('{{this._id}}')" class="btn btn-primary-tech btn-sm flex-grow-1"><i class="fas fa-cart-plus"></i> Agregar</button>
+      </div>
     </div>
     {{/each}}
-</div>
+  </div>
 
-<div class="paginationPanel">
+  <div class="pagination-tech">
     {{#if hasPrevPage}}
-    <a href="/products/?page={{prevPage}}"><button class="btn btn-dark">Anterior</button></a>
+    <a href="/products/?page={{prevPage}}" class="btn btn-ghost btn-sm"><i class="fas fa-chevron-left"></i> Anterior</a>
     {{/if}}
-
-    <h5>Pagina: {{page}} de {{totalPages}}</h5>
-
+    <span class="page-info">Página <span>{{page}}</span> de <span>{{totalPages}}</span></span>
     {{#if hasNextPage}}
-    <a href="/products/?page={{nextPage}}"><button class="btn btn-dark">Siguiente</button></a>
+    <a href="/products/?page={{nextPage}}" class="btn btn-ghost btn-sm">Siguiente <i class="fas fa-chevron-right"></i></a>
     {{/if}}
+  </div>
+  {{else}}
+  <div class="empty-state">
+    <div class="empty-icon"><i class="fas fa-box-open"></i></div>
+    <h3>No hay productos disponibles</h3>
+    <p>Actualmente no tenemos productos en esta categoría. Vuelve pronto para ver nuestro catálogo actualizado.</p>
+    <a href="/products" class="btn btn-primary-tech"><i class="fas fa-sync-alt"></i> Ver todos</a>
+  </div>
+  {{/if}}
 </div>
 
+<script>
+function applyFilter() {
+  const sort = document.getElementById('sortFilter').value;
+  const category = document.getElementById('categoryFilter').value;
+  const limit = document.getElementById('limitFilter').value;
+  let url = '/products/?page=1';
+  if (sort) url += `&sort=${sort}`;
+  if (category) url += `&category=${category}`;
+  if (limit) url += `&limit=${limit}`;
+  window.location.href = url;
+}
+
+// Set current filter values from URL
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('sort')) document.getElementById('sortFilter').value = params.get('sort');
+  if (params.get('category')) document.getElementById('categoryFilter').value = params.get('category');
+  if (params.get('limit')) document.getElementById('limitFilter').value = params.get('limit');
+});
+</script>
 <script src="/js/products.js"></script>

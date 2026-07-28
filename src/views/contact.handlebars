@@ -1,28 +1,60 @@
-<h1 class="title">Contáctenos</h1>
+<div class="page-header">
+  <h1><i class="fas fa-headset"></i> Contáctenos</h1>
+  <p class="subtitle">Estamos aquí para ayudarte</p>
+</div>
 
-<form id="formProductCreator" class="formProducts">
-    <div class="row">
-        <div class="col-4">
-            <input class="controls" type="text" name="title" id="title" placeholder="Nombre" required />
-        </div>
-        <div class="col-8">
-            <input class="controls" type="text" name="email" id="email" placeholder="Email" required />
-        </div>
-        <div class="row">
-            <div class="form-check col-6 ms-4">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
-                <label class="form-check-label" for="flexCheckDefault">
-                    Acepto terminos y condiciones
-                </label>
-            </div>
-            <div class="col-12">
-                <div class="mb-5">
-                    <label for="exampleFormControlTextarea1" class="form-label">Dejanos tu mensaje!</label>
-                    <textarea class="form-control controls" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-            </div>
-        </div>
+<div class="contact-page">
+  <div class="contact-info-cards">
+    <div class="contact-info-card">
+      <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+      <h4>Ubicación</h4>
+      <p>Medellín, Colombia</p>
+    </div>
+    <div class="contact-info-card">
+      <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+      <h4>Teléfono</h4>
+      <p>+57 300 123 4567</p>
+    </div>
+    <div class="contact-info-card">
+      <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+      <h4>Email</h4>
+      <p>info@herosystems.com</p>
+    </div>
+    <div class="contact-info-card">
+      <div class="contact-icon"><i class="fas fa-clock"></i></div>
+      <h4>Horario</h4>
+      <p>Lun-Sáb: 9AM - 7PM</p>
+    </div>
+  </div>
+
+  <form id="formProductCreator" class="form-tech" style="max-width: 700px;">
+    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 24px; color: var(--text-primary); text-align: center;">
+      <i class="fas fa-paper-plane" style="color: var(--accent-cyan);"></i> Envíanos un mensaje
+    </h3>
+
+    <div class="form-grid-tech">
+      <div>
+        <label class="form-label"><i class="fas fa-user"></i> Nombre</label>
+        <input class="form-control" type="text" name="title" id="title" placeholder="Tu nombre" required />
+      </div>
+      <div>
+        <label class="form-label"><i class="fas fa-envelope"></i> Email</label>
+        <input class="form-control" type="text" name="email" id="email" placeholder="tu@correo.com" required />
+      </div>
+    </div>
+    <div class="full-width" style="margin-top: 16px;">
+      <label class="form-label"><i class="fas fa-comment"></i> Mensaje</label>
+      <textarea class="form-control" id="message" rows="4" placeholder="Escribe tu mensaje aquí..." style="resize: vertical;"></textarea>
+    </div>
+    <div class="form-check mt-3">
+      <input class="form-check-input" type="checkbox" value="" id="termsCheck">
+      <label class="form-check-label" for="termsCheck">
+        Acepto los términos y condiciones
+      </label>
     </div>
 
-    <button class="btn btn-card" id="add-btn" type="submit">Enviar</button>
-</form>
+    <button class="btn btn-primary-tech btn-lg w-100 mt-4" id="add-btn" type="submit">
+      <i class="fas fa-paper-plane"></i> Enviar Mensaje
+    </button>
+  </form>
+</div>

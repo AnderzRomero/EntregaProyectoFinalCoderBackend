@@ -1,31 +1,28 @@
+async function updateQuantity(pid, delta) {
+    try {
+        const response = await fetch(`/api/carts/products/${pid}`, { method: 'PUT' });
+        const result = await response.json();
+        if (result.status === 'success') {
+            location.reload();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 async function buy_cart(id) {
-
     const cart = localStorage.getItem('accessToken');
-    if (cart) {//Mientras haya carrito temporal, es porque no hay usuario
+    if (cart) {
         console.log("No se ha logeado para realizar la compra");
-    } else {//Si no encontró la cookie, es porque ya hay un usuario        
-        const cartId = `${id}`;
-        const urlpurchase = '/api/carts/' + cartId + '/purchase';
-
-        const requestOptions = {
+    } else {
+        const response = await fetch(`/api/carts/${id}/purchase`, {
             method: 'POST',
             body: JSON.stringify(),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        };
-
-        fetch(urlpurchase, requestOptions)
-            .then(response => {
-                return response.json();
-            })
-            .then(result => {                
-                if (result.message === "Compra exitosa") {
-                    window.location.href = `/api/carts/tickets`;
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            });
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const result = await response.json();
+        if (result.message === "Compra exitosa") {
+            window.location.href = `/api/carts/tickets`;
+        }
     }
 }

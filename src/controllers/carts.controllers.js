@@ -11,6 +11,7 @@ const getCart = async (req, res) => {
     if (!cart) return res.status(400).send({ status: "error", error: "Carrito no encontrado" });
     return res.render('Carts', {
         css: 'carts',
+        title: 'Carrito de Compras',
         cart: cart
     })
 }
@@ -23,6 +24,7 @@ const getCartCompra = async (req, res) => {
         if (!cart) return res.status(400).send({ status: "error", error: "Carrito no encontrado" });
         res.render('tickets', {
             css: 'tickets',
+            title: 'Compra Finalizada',
             cart: cart,
             user: user
         })

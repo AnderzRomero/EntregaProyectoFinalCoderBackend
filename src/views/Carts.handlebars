@@ -1,79 +1,94 @@
-<div>
-    <h1 class="title">Carrito de Compras</h1>
+<div class="page-header">
+  <h1><i class="fas fa-shopping-cart"></i> Carrito de Compras</h1>
+  <p class="subtitle">Revisa los productos antes de comprar</p>
 </div>
-<div>
-    {{#if cart}}
-    <div class="subtitle">
-        <h3>Productos en el carrito</h3>
-    </div>
-    <div>
-        <table class="table">
-            <thead class="tablehead">
-                <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Categoría</th>
-                    <th scope="col">Codigo</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio Unidad</th>
-                    <th scope="col">Subtotal</th>
-                </tr>
-            </thead>
-            {{#if cart.products.length}}
-            {{#each cart.products}}
-            <tbody class="carritoContainer">
 
-                <div class="card-body">
-                    <td><img class="card-img" src={{this._id.thumbnail}} alt={{this._id.title}}></td>
-                    <td>
-                        <h5 class="card-title">{{this._id.title}}</h5>
-                    </td>
-                    <div class="card-info">
-                        <td>
-                            <p class="card-text">{{this._id.description}}</p>
-                        </td>
-                        <td>
-                            <p class="card-text">{{this._id.category}}</p>
-                        </td>
-                        <td>
-                            <p class="card-text">{{this._id.code}}</p>
-                        </td>
-                        <td>
-                            <p class="card-text">{{this._id.stock}}</p>
-                        </td>
-                        <td>
-                            <p class="card-text">{{this.quantity}}</p>
-                        </td>
-                        <td>
-                            <p class="card-text"><strong>$ </strong>{{this._id.price}}</p>
-                        </td>
-                        <td>
-                            <p class="card-text"><strong>$ </strong>{{subtotal this._id.price this.quantity}}</p>
-                        </td>
-                    </div>
-                </div>
-            </tbody>
-            {{/each}}
-        </table>
-        <span class="amountProducts">
-            <h3>total: {{sumPrice cart.products}}</h3>
-        </span>
-    </div>
-    <br>
-    <hr>
+<div class="cart-page">
+  {{#if cart}}
+  {{#if cart.products.length}}
+  <div class="table-responsive-tech">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Detalle</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cart.products}}
+        <tr>
+          <td data-label="Producto">
+            <img class="cart-product-img" src="{{this._id.thumbnail}}" alt="{{this._id.title}}">
+          </td>
+          <td data-label="Detalle">
+            <div class="cart-product-name">{{this._id.title}}</div>
+            <span class="cart-product-desc">{{this._id.description}}</span>
+            <span class="cart-product-desc" style="margin-top: 4px; display: block;">
+              <span class="badge-tech cyan">{{this._id.code}}</span>
+              <span class="badge-tech orange">Stock: {{this._id.stock}}</span>
+            </span>
+          </td>
+          <td data-label="Categoría">
+            <span class="badge-tech purple">{{this._id.category}}</span>
+          </td>
+          <td data-label="Precio" class="cart-product-price">${{this._id.price}}</td>
+          <td data-label="Cantidad">
+            <div class="qty-control">
+              <button onclick="updateQuantity('{{this._id._id}}', -1)"><i class="fas fa-minus"></i></button>
+              <input type="text" value="{{this.quantity}}" readonly>
+              <button onclick="updateQuantity('{{this._id._id}}', 1)"><i class="fas fa-plus"></i></button>
+            </div>
+          </td>
+          <td data-label="Subtotal" class="cart-product-price">${{subtotal this._id.price this.quantity}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 
-    {{else}}
-    <span>
-        <p>No hay productos en el carrito.</p>
-    </span>
-    {{/if}}
-    <div class="btnCart">
-        <a href="/api/products"><button type="button" class="btn btn-dark">Regresar a Tienda</button></a>
-        <a href="/api/carts/tickets"><button type="button" class="btn btn-dark">Realizar Compra</button></a>
+  <div class="cart-summary animate-in">
+    <div class="summary-row">
+      <span class="summary-label">Subtotal</span>
+      <span class="summary-value">${{sumPrice cart.products}}</span>
     </div>
-    {{else}}
-    <p>No se encontró ningún carrito.</p>
-    {{/if}}
+    <div class="summary-row">
+      <span class="summary-label">Envío</span>
+      <span class="summary-value" style="color: var(--accent-teal);">Gratis</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Impuestos (IVA)</span>
+      <span class="summary-value">Incluido</span>
+    </div>
+    <div class="summary-row" style="border-bottom: none;">
+      <span class="summary-label" style="font-size: 1.1rem; font-weight: 600;">Total</span>
+      <span class="summary-value summary-total">${{sumPrice cart.products}}</span>
+    </div>
+  </div>
+
+  <div class="cart-actions">
+    <a href="/products" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Seguir Comprando</a>
+    <a href="/api/carts/{{cart._id}}" class="btn btn-primary-tech"><i class="fas fa-lock"></i> Realizar Compra</a>
+  </div>
+  {{else}}
+  <div class="empty-state">
+    <div class="empty-icon"><i class="fas fa-shopping-cart"></i></div>
+    <h3>Tu carrito está vacío</h3>
+    <p>Agrega productos desde nuestra tienda para empezar a comprar.</p>
+    <a href="/products" class="btn btn-primary-tech"><i class="fas fa-store"></i> Ir a la Tienda</a>
+  </div>
+  {{/if}}
+  {{else}}
+  <div class="empty-state">
+    <div class="empty-icon"><i class="fas fa-exclamation-triangle"></i></div>
+    <h3>No se encontró ningún carrito</h3>
+    <p>Inicia sesión o crea una cuenta para gestionar tu carrito de compras.</p>
+    <a href="/login" class="btn btn-primary-tech"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+  </div>
+  {{/if}}
 </div>
+
+<script src="/js/carts.js"></script>

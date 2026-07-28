@@ -1,69 +1,46 @@
-const profile = document.getElementById("profile");
-const logoutButton = document.getElementById("logout");
-
 const renderUserView = (payload) => {
-    let content;
-    switch (payload.role) {
-        case "user":
-            if (payload.isPremium === false) {
-                content = `
-          <p class="profileName"><strong>Hola!  </strong>${payload.name}</p>
-          <p class="profileEmail"><strong>Email:</strong> ${payload.email}</p>
-          <p class="profileRole"><strong>Rol:</strong> ${payload.role}</p>
-          <h5> ¿Deseas ser premium? Primero debe agregar la documentación!</h5>
-          <button class="btn btn-card" onclick="premium()">Agregar documentos</button>
-        `;
-            } else {
-                content = `
-          <p class="profileName"><strong>Hola!  </strong>${payload.name}</p>
-          <p class="profileEmail"><strong>Email:</strong> ${payload.email}</p>
-          <p class="profileRole"><strong>Rol:</strong> ${payload.role}</p>
-          <h5> Ya cumples con los requisitos para ser premium</h5>
-          <button class="btn btn-card" onclick="updateUserPremiumStatus('${payload.id}')">Ser premium</button>
-        `;
-            }
-            break;
+    document.getElementById("profileName").textContent = payload.name || payload.nombres || "Usuario";
+    document.getElementById("profileEmail").textContent = payload.email || "";
+    document.getElementById("profileId").textContent = payload.id || payload._id || "—";
 
-        case "premium":
-            content = `
-          <p class="profileName"><strong>Hola!  </strong>${payload.name}</p>
-          <p class="profileEmail"><strong>Email:</strong> ${payload.email}</p>
-          <p class="profileRole"><strong>Rol:</strong> ${payload.role}</p>
-          <h5> ¿Deseas Empezar a vender productos?</h5>
-          <button class="btn btn-card" onclick="productCreator()">Sí</button>
-      `;
-            break;
+    const roleEl = document.getElementById("profileRole");
+    const roleMap = {
+        admin: '<span class="profile-role admin"><i class="fas fa-shield-alt"></i> Administrador</span>',
+        premium: '<span class="profile-role premium"><i class="fas fa-crown"></i> Premium</span>',
+        user: '<span class="profile-role user"><i class="fas fa-user"></i> Usuario</span>'
+    };
+    roleEl.innerHTML = roleMap[payload.role] || `<span class="profile-role user">${payload.role}</span>`;
 
-        case "admin":
-            content = `
-        <p class="profileName"><strong>Hola!  </strong>${payload.nombres}</p>
-        <p class="profileRole"><strong>Rol:</strong> ${payload.role}</p>
-        <br>
-        <h5> Ir al panel de administración de productos</h5>
-        <button class="btn btn-card mb-4" onclick="productCreator()">Sí</button>
-        <br>
-        <h5> Ir al panel de administración de Usuarios</h5>
-        <a href="/api/users" class="btn btn-card">Sí</a>
-      `;
-            break;
+    document.getElementById("profileCart").textContent = payload.cart || "—";
+    document.getElementById("profileMemberSince").textContent = payload.createdAt ? new Date(payload.createdAt).toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" }) : "—";
 
-        default:
-            content = "Rol no reconocido";
+    const actionsEl = document.querySelector(".profile-actions") || document.createElement("div");
+
+    let extraActions = "";
+    if (payload.role === "user" && payload.isPremium === false) {
+        extraActions = `<a href="/premium" class="btn btn-secondary-tech"><i class="fas fa-crown"></i> Ser Premium</a>`;
+    } else if (payload.role === "user" && payload.isPremium === true) {
+        extraActions = `<button onclick="updateUserPremiumStatus('${payload.id}')" class="btn btn-secondary-tech"><i class="fas fa-crown"></i> Actualizar a Premium</button>`;
+    } else if (payload.role === "premium" || payload.role === "admin") {
+        extraActions = `<a href="/productCreator" class="btn btn-secondary-tech"><i class="fas fa-tools"></i> Gestionar Productos</a>`;
     }
-
-    profile.innerHTML = `
-    <div>${content}</div>
-  `;
+    if (extraActions) {
+        const temp = document.createElement("div");
+        temp.innerHTML = extraActions;
+        while (temp.firstChild) {
+            actionsEl.insertBefore(temp.firstChild, actionsEl.querySelector("a[href='/products']"));
+        }
+    }
 };
 
 const fetchCurrentUser = async () => {
     try {
-        const response = await fetch("/api/sessions/current", {
-            method: "GET",
-        });
+        const response = await fetch("/api/sessions/current", { method: "GET" });
         if (response.ok) {
             const result = await response.json();
-            renderUserView(result.payload);
+            if (result.payload) {
+                renderUserView(result.payload);
+            }
             return result.payload;
         }
     } catch (error) {
@@ -80,18 +57,12 @@ async function productCreator() {
 }
 
 const updateUserPremiumStatus = async (uid) => {
-    fetchCurrentUser();
-    const premiumUser = await fetch(`/api/users/premium/${uid}`, {
-        method: "PUT",
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.status === "success") {
-                renderUserView(data.payload);
-            }
-            // console.log("Informacion de la data del fetch", data.payload.role);
-        });
+    const res = await fetch(`/api/users/premium/${uid}`, { method: "PUT" });
+    const data = await res.json();
+    if (data.status === "success") {
+        renderUserView(data.payload);
+        Swal.fire({ icon: "success", title: "¡Felicidades!", text: "Ahora eres usuario Premium", confirmButtonColor: "#00d4ff" });
+    }
 };
 
 fetchCurrentUser();
-renderUserView();

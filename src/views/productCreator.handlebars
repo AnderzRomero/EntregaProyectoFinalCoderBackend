@@ -1,18 +1,30 @@
-<h1 class="title">Registro de productos</h1>
+<div class="page-header">
+  <h1><i class="fas fa-tools"></i> Gestión de Productos</h1>
+  <p class="subtitle">Administra el catálogo de HeroSystems</p>
+</div>
 
-<form id="formProductCreator" class="formProducts">
-  <div class="row">
-    <div class="col-4">
-      <input class="controls" type="text" name="title" id="title" placeholder="Nombre" required />
+<div class="contact-page">
+  <form id="formProductCreator" class="form-tech" style="max-width: 800px;" enctype="multipart/form-data">
+    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 24px; color: var(--text-primary); text-align: center;">
+      <i class="fas fa-plus-circle" style="color: var(--accent-cyan);"></i> Registrar Nuevo Producto
+    </h3>
+
+    <div class="form-grid-tech">
+      <div>
+        <label class="form-label"><i class="fas fa-tag"></i> Nombre</label>
+        <input class="form-control" type="text" name="title" id="title" placeholder="Nombre del producto" required />
+      </div>
+      <div>
+        <label class="form-label"><i class="fas fa-align-left"></i> Descripción</label>
+        <input class="form-control" type="text" name="description" id="description" placeholder="Descripción del producto" required />
+      </div>
     </div>
-    <div class="col-8">
-      <input class="controls" type="text" name="description" id="description" placeholder="Descripción" required />
-    </div>
-    <div class="row">
-      <div class="col-4">
-        <select class="form-select" type="text" name="category" id="category" aria-label=".form-select-lg example"
-          required>
-          <option selected>Categoria</option>
+
+    <div class="form-grid-tech" style="margin-top: 16px;">
+      <div>
+        <label class="form-label"><i class="fas fa-folder"></i> Categoría</label>
+        <select class="form-select" name="category" id="category" required>
+          <option value="">Seleccionar categoría</option>
           <option value="Accesorios Externos">Accesorios Externos</option>
           <option value="Cajas">Cajas</option>
           <option value="Combos Cajas con Fuentes">Combos Cajas con Fuentes</option>
@@ -38,40 +50,47 @@
           <option value="Unidades SSD">Unidades SSD</option>
         </select>
       </div>
-      <div class="col-4">
-        <input class="controls" type="text" name="code" id="code" placeholder="Código" required />
+      <div>
+        <label class="form-label"><i class="fas fa-barcode"></i> Código</label>
+        <input class="form-control" type="text" name="code" id="code" placeholder="Código del producto" required />
       </div>
-      <div class="col-4">
-        <input class="controls" type="number" name="stock" id="stock" placeholder="Stock = 0" required />
+      <div>
+        <label class="form-label"><i class="fas fa-boxes"></i> Stock</label>
+        <input class="form-control" type="number" name="stock" id="stock" placeholder="Cantidad en stock" required />
       </div>
-    </div>
-    <div class="row">
-      <div class="col-4">
-        <input class="controls" type="number" step="0.01" name="price" id="price" placeholder=" Precio $ 000.000"
-          required />
-      </div>
-      <div class="col-8">
-        <label class="label" for="thumbnail">Imagenes</label>
-        <input class="controls" type="file" name="thumbnail" id="thumbnail" />
+      <div>
+        <label class="form-label"><i class="fas fa-dollar-sign"></i> Precio</label>
+        <input class="form-control" type="number" step="0.01" name="price" id="price" placeholder="0.00" required />
       </div>
     </div>
-  </div>
 
-  <button class="btn btn-card" id="add-btn" type="submit">Registrar</button>
-
-
-  <h2 class="subtitle">Eliminar producto</h2>
-  <div class="row">
-    <div class="col-12 controlsDeleteProducto">
-      <input class="controls text-center" type="text" name="pid" id="pid" placeholder="ID del producto" />
+    <div class="mb-3 mt-3">
+      <label class="form-label"><i class="fas fa-image"></i> Imagen del Producto</label>
+      <input class="form-control" type="file" name="thumbnail" id="thumbnail" />
     </div>
-  </div>
 
-  <button class="btn btn-card" id="delete-btn" type="button">Eliminar/Estado</button>
-</form>
+    <button class="btn btn-primary-tech btn-lg w-100" id="add-btn" type="submit">
+      <i class="fas fa-save"></i> Registrar Producto
+    </button>
+  </form>
 
-<div id="form-messages"></div>
-<div class="container" id="container"></div>
+  <div class="divider-tech" style="max-width: 800px; margin: 40px auto;">Gestión de productos existentes</div>
 
+  <form id="deleteForm" class="form-tech" style="max-width: 500px;">
+    <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 24px; color: var(--text-primary); text-align: center;">
+      <i class="fas fa-trash-alt" style="color: var(--accent-pink);"></i> Eliminar / Cambiar Estado
+    </h3>
+    <div class="mb-3">
+      <label class="form-label"><i class="fas fa-fingerprint"></i> ID del Producto</label>
+      <input class="form-control text-center" type="text" name="pid" id="pid" placeholder="Ingresa el ID del producto" />
+    </div>
+    <button class="btn btn-danger-tech w-100" id="delete-btn" type="button">
+      <i class="fas fa-trash-alt"></i> Eliminar / Cambiar Estado
+    </button>
+  </form>
+
+  <div id="form-messages" style="max-width: 800px; margin: 20px auto;"></div>
+  <div class="products-grid" id="container" style="max-width: 800px; margin: 0 auto;"></div>
+</div>
 
 <script src="/js/productCreator.js"></script>

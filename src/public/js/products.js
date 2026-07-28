@@ -1,15 +1,27 @@
 async function addProduct(id) {
     const cart = getCookie('cart');
-    if (cart) {//Mientras haya carrito temporal, es porque no hay usuario
-        const response = await fetch(`/api/carts/${cart}/products/${id}`, {
-            method: 'PUT'
-        })
-        const result = await response.json();        
-    } else {//Si no encontró la cookie, es porque ya hay un usuario
-        const response = await fetch(`/api/carts/products/${id}`, {
-            method: 'PUT'
-        })
-        const result = await response.json();        
+    try {
+        let response;
+        if (cart) {
+            response = await fetch(`/api/carts/${cart}/products/${id}`, { method: 'PUT' });
+        } else {
+            response = await fetch(`/api/carts/products/${id}`, { method: 'PUT' });
+        }
+        const result = await response.json();
+        if (result.status === 'success') {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Agregado!',
+                text: 'Producto agregado al carrito',
+                timer: 1500,
+                showConfirmButton: false,
+                background: '#111827',
+                color: '#e2e8f0',
+                iconColor: '#00d4ff'
+            });
+        }
+    } catch (error) {
+        console.error(error);
     }
 }
 

@@ -1,10 +1,40 @@
-<h1 class="title">Bienvenidos a tu Perfil</h1>
-
-<a href="/api/sessions/logout"><button class="btn btn-logon">Cerrar Session</button></a>
-
-<div class="container">
-    <h5 class="subtitle">Datos de usuario:</h5>
-
-    <div class="profile" id="profile"></div>
+<div class="page-header">
+  <h1><i class="fas fa-user-circle"></i> Mi Perfil</h1>
+  <p class="subtitle">Gestiona tu información personal</p>
 </div>
+
+<div class="profile-page">
+  <div class="profile-card">
+    <div class="profile-avatar" id="profileAvatar">
+      <i class="fas fa-user-circle" style="font-size: 120px; color: var(--accent-cyan);"></i>
+    </div>
+    <div class="profile-info">
+      <div class="profile-name" id="profileName">Cargando...</div>
+      <div class="profile-email" id="profileEmail"></div>
+      <div id="profileRole"></div>
+
+      <div class="profile-details">
+        <div class="profile-detail-item">
+          <div class="detail-label"><i class="fas fa-fingerprint"></i> ID de Usuario</div>
+          <div class="detail-value" id="profileId">—</div>
+        </div>
+        <div class="profile-detail-item">
+          <div class="detail-label"><i class="fas fa-calendar-alt"></i> Miembro desde</div>
+          <div class="detail-value" id="profileMemberSince">—</div>
+        </div>
+        <div class="profile-detail-item">
+          <div class="detail-label"><i class="fas fa-shopping-cart"></i> ID Carrito</div>
+          <div class="detail-value" id="profileCart">—</div>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <a href="/products" class="btn btn-primary-tech"><i class="fas fa-store"></i> Ir a la Tienda</a>
+        <a href="/api/carts" class="btn btn-secondary-tech"><i class="fas fa-shopping-cart"></i> Mi Carrito</a>
+        <a href="/api/sessions/logout" class="btn btn-danger-tech"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="/js/profiles.js"></script>

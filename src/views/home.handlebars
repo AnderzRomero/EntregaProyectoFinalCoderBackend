@@ -1,31 +1,119 @@
-<h1 class="title">Bienvenidos a HeroSystems</h1>
-<h5 class="subtitle">Expertos en mantenimiento de equipos, armado de computadoras gamer, venta de productos de
-  tecnologia y mucho mas.</h5>
+<section class="hero-section">
+  <div class="hero-content">
+    <span class="hero-badge"><i class="fas fa-bolt"></i> Tecnología de Punta</span>
+    <h1 class="hero-title">Bienvenidos a HeroSystems</h1>
+    <p class="hero-subtitle">Expertos en mantenimiento de equipos, armado de computadoras gamer, venta de productos de tecnología y mucho más.</p>
+    <div class="hero-actions">
+      <a href="/products" class="btn btn-primary-tech btn-lg"><i class="fas fa-shopping-bag"></i> Ver Tienda</a>
+      <a href="/contact" class="btn btn-ghost btn-lg"><i class="fas fa-headset"></i> Contáctanos</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Productos</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label">Clientes Satisfechos</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Años de Experiencia</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Soporte Técnico</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section class="container-home">
+<section class="featured-section">
+  <div class="section-header">
+    <h2><i class="fas fa-star"></i> Categorías Destacadas</h2>
+    <p>Encuentra todo lo que necesitas para tu setup perfecto</p>
+  </div>
+  <div class="categories-grid">
+    <a href="/products?category=Tarjetas Graficas" class="category-card">
+      <div class="category-icon"><i class="fas fa-microchip"></i></div>
+      <h3>Tarjetas Gráficas</h3>
+      <p>GPU NVIDIA & AMD</p>
+    </a>
+    <a href="/products?category=Memorias RAM" class="category-card">
+      <div class="category-icon"><i class="fas fa-memory"></i></div>
+      <h3>Memorias RAM</h3>
+      <p>DDR4 & DDR5</p>
+    </a>
+    <a href="/products?category=Monitores" class="category-card">
+      <div class="category-icon"><i class="fas fa-desktop"></i></div>
+      <h3>Monitores</h3>
+      <p>HD, 4K, Curvos</p>
+    </a>
+    <a href="/products?category=Teclados" class="category-card">
+      <div class="category-icon"><i class="fas fa-keyboard"></i></div>
+      <h3>Teclados</h3>
+      <p>Mecánicos y Gaming</p>
+    </a>
+    <a href="/products?category=Sillas" class="category-card">
+      <div class="category-icon"><i class="fas fa-chair"></i></div>
+      <h3>Sillas Gamer</h3>
+      <p>Ergonomía y estilo</p>
+    </a>
+    <a href="/products?category=Portatiles Gamer" class="category-card">
+      <div class="category-icon"><i class="fas fa-laptop"></i></div>
+      <h3>Portátiles</h3>
+      <p>Gaming y Oficina</p>
+    </a>
+  </div>
+</section>
+
+<section class="slider-section">
+  <div class="section-header">
+    <h2><i class="fas fa-images"></i> Nuestro Catálogo</h2>
+    <p>Descubre los mejores productos para tu equipo</p>
+  </div>
   <div class="slider-container">
     <div class="slider">
       <div class="slide">
-        <img class="imgslider" src="/img/image1.jpg" alt="Imagen 1">
+        <img src="/img/image1.jpg" alt="Producto 1">
+        <div class="slide-overlay">
+          <h3>Armado de PCs Gamer</h3>
+          <p>Los mejores componentes para tu máquina ideal</p>
+        </div>
       </div>
       <div class="slide">
-        <img class="imgslider" src="/img/image2.jpg" alt="Imagen 2">
+        <img src="/img/image2.jpg" alt="Producto 2">
+        <div class="slide-overlay">
+          <h3>Componentes de Alto Rendimiento</h3>
+          <p>Calidad y velocidad para tus proyectos</p>
+        </div>
       </div>
       <div class="slide">
-        <img class="imgslider" src="/img/image3.jpg" alt="Imagen 3">
+        <img src="/img/image3.jpg" alt="Producto 3">
+        <div class="slide-overlay">
+          <h3>Periféricos Gaming</h3>
+          <p>La mejor experiencia de juego</p>
+        </div>
       </div>
       <div class="slide">
-        <img class="imgslider" src="/img/image4.jpg" alt="Imagen 4">
+        <img src="/img/image4.jpg" alt="Producto 4">
+        <div class="slide-overlay">
+          <h3>Mantenimiento Especializado</h3>
+          <p>Mantenemos tu equipo en óptimas condiciones</p>
+        </div>
       </div>
       <div class="slide">
-        <img class="imgslider" src="/img/image5.jpg" alt="Imagen 5">
+        <img src="/img/image5.jpg" alt="Producto 5">
+        <div class="slide-overlay">
+          <h3>Soluciones en Redes</h3>
+          <p>Conectividad y velocidad para tu hogar u oficina</p>
+        </div>
       </div>
     </div>
-    <button class="prev-btn">Prev</button>
-    <button class="next-btn">Next</button>
+    <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
   </div>
+  <div class="slider-dots"></div>
 </section>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
 <script src="/js/home.js"></script>
