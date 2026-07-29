@@ -74,7 +74,7 @@ const initializeStrategies = () => {
         session: false,
         clientID: 'Iv1.47994dddd59e9f0e',
         clientSecret: 'c07df5b4bf34171576817394190b1424b2f3b45b',
-        callbackURL: 'http://localhost:8080/api/sessions/githubcallback'
+        callbackURL: config.app.BASE_URL + '/api/sessions/githubcallback'
     }, async (accessToken, refreshToken, profile, done) => {
         const { email, name } = profile._json;
 
@@ -85,7 +85,7 @@ const initializeStrategies = () => {
             const newUser = {
                 firstName: name,
                 email,
-                password: ''
+                password: await auth.createHash(Math.random().toString(36).slice(2) + 'OAuthDefault')
             }
             const cartResult = await cartsServices.create();
             cart = cartResult._id
@@ -102,7 +102,7 @@ const initializeStrategies = () => {
     passport.use('google', new GoogleStrategy({
         clientID: config.google.CLIENT,
         clientSecret: config.google.SECRET,
-        callbackURL: 'http://localhost:8080/api/sessions/googlecallback',
+        callbackURL: config.app.BASE_URL + '/api/sessions/googlecallback',
         passReqToCallback: true
     }, async (req, accessToken, refreshToken, profile, done) => {
         const { _json } = profile;
@@ -113,7 +113,8 @@ const initializeStrategies = () => {
             const newUser = {
                 firstName: _json.given_name,
                 lastName: _json.family_name,
-                email: _json.email
+                email: _json.email,
+                password: await auth.createHash(Math.random().toString(36).slice(2) + 'OAuthDefault')
             }
             //Revisar la librería temporal
             let cart;

@@ -412,6 +412,17 @@ const premium = async (req, res, next) => {
     }
 };
 
+const passwordRestoreRequest = async (req, res, next) => {
+    try {
+        res.render('PasswordRestoreRequest', {
+            title: 'Recuperar Contraseña'
+        });
+    } catch (error) {
+        req.logger.error("No se logro redireccionar a la vista de solicitud de restauracion", error);
+        next(error);
+    }
+};
+
 export default {
     home,
     contact,
@@ -423,6 +434,7 @@ export default {
     uploadDocuments,
     login,
     passwordRestore,
+    passwordRestoreRequest,
     register,
     profile,
     getproducts,

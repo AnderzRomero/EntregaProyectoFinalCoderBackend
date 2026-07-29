@@ -26,32 +26,3 @@ form.addEventListener('submit', async e => {
         });
     }
 });
-
-async function restorePassword() {
-    Swal.fire({
-        text: 'Ingresa tu correo electrónico, te enviaremos un mail de restauración',
-        input: 'text',
-        background: '#111827',
-        color: '#e2e8f0',
-        inputValidator: value => {
-            return !value && "Es necesario un correo para poder enviar el link de restauración";
-        }
-    }).then(async result => {
-        if (result.value) {
-            const email = result.value;
-            await fetch('/api/sessions/passwordRestoreRequest', {
-                method: 'POST',
-                body: JSON.stringify({ email }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            Swal.fire({
-                icon: "success",
-                text: "Si el usuario está en nuestra base, se enviará un correo electrónico con el link de restablecimiento",
-                background: '#111827',
-                color: '#e2e8f0',
-                iconColor: '#00d4ff',
-                confirmButtonColor: '#00d4ff'
-            });
-        }
-    });
-}

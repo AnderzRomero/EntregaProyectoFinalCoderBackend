@@ -1,0 +1,11 @@
+{"level":"error","message":"No se pudo enviar el correo"}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-5c34f1475d3sm1064578e0c.9 - gsmtp","responseCode":535}
+{"level":"error","message":"No se pudo enviar el correo"}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-755a74c0b8dsm816161137.6 - gsmtp","responseCode":535}
+{"level":"error","message":"No se pudo enviar el correo"}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-977b5b597e2sm659608241.5 - gsmtp","responseCode":535}
+{"level":"error","message":"No se pudo enviar el correo"}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-755a9aa3a59sm869334137.10 - gsmtp","responseCode":535}
+{"level":"error","message":"No se pudo enviar el correo"}
+{"code":"EAUTH","command":"AUTH PLAIN","level":"error","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-755a709156fsm935563137.1 - gsmtp","responseCode":535}
+{"code":"invalid_grant","level":"error","message":"Bad Request","name":"TokenError","status":500}

@@ -11,9 +11,9 @@
   --accent-teal: #06d6a0;
   --accent-pink: #ec4899;
   --accent-orange: #f59e0b;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
   --border-color: rgba(0, 212, 255, 0.15);
   --border-glow: rgba(0, 212, 255, 0.4);
   --gradient-hero: linear-gradient(135deg, #0a0e17 0%, #1a1a3e 50%, #0a0e17 100%);

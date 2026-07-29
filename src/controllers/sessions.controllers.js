@@ -176,7 +176,7 @@ const passwordRestoreRequest = async (req, res, next) => {
         if (!user) return res.sendBadRequest("Usuario no existe");
         const token = jwt.sign({ email }, config.jwt.SECRET, { expiresIn: '1h' });
         const mailerService = new MailerService();
-        const result = await mailerService.sendMail([email], DMailTemplates.PWD_RESTORE, { token });
+        const result = await mailerService.sendMail([email], DMailTemplates.PWD_RESTORE, { token, baseUrl: config.app.BASE_URL });
         res.sendSuccess("Correo Enviado!!");
     } catch (error) {
         req.logger.error("No se pudo enviar el correo");

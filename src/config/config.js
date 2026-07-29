@@ -17,7 +17,8 @@ export default {
         ADMIN_EMAIL: process.env.ADMIN_EMAIL,
         ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
         PERSISTENCE: process.env.PERSISTENCE || 'MONGO',
-        LOGGER: process.env.LOGGER || 'development'
+        LOGGER: process.env.LOGGER || 'development',
+        BASE_URL: process.env.BASE_URL || 'http://localhost:8080'
     },
     mongo: {
         URL: process.env.MONGO_URL || 'localhost:27017',
